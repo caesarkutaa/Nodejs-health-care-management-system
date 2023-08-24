@@ -14,7 +14,7 @@ This is a simple healthcare management system built using Node.js, Express.js, a
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/healthcare-management-system.git
+   git clone https://github.com/caesarkutaa/healthcare-management-system.git
    ```
 
 2. **Navigate to the project directory:**
@@ -76,5 +76,3 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
-
