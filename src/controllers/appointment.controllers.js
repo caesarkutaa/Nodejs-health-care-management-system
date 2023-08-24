@@ -4,7 +4,7 @@ const Appointment = require('../models/appointment.model')
 const createAppointment = async (req,res)=>{
     try {
         const appointment = await Appointment.create(req.body);
-        res.status(201).json(appointment);
+        res.status(201).json({appointment});
       } catch (error) {
         res.status(400).json({ error: 'Could not create appointment' });
       }
@@ -15,7 +15,7 @@ const createAppointment = async (req,res)=>{
 const getALLappointment = async (req,res)=>{
     try {
         const appointments = await Appointment.find().populate('patient');
-        res.json(appointments);
+        res.status(200).json({appointments});
       } catch (error) {
         res.status(500).json({ error: 'Could not retrieve appointments' });
       }
@@ -29,6 +29,7 @@ const getOneAppointment = async (req,res)=>{
         if(!appointment){
             return res.status(404).json({msg:`no Appointment with the id found : ${appointmentID}`})
            }
+           res.status(200).json({appointment});
     } catch (error) {
         res.status(500).json({msg:error})
     }
@@ -41,6 +42,7 @@ const updateAppointment = async (req,res)=>{
         if(!appointment){
             return res.status(404).json({msg:`no Appointment with the id found : ${appointmentID}`})
            }
+           res.status(200).json({appointment});
     } catch (error) {
         res.status(500).json({msg:error})
     }
