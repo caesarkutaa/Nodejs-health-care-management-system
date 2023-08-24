@@ -11,7 +11,7 @@ const {
 
 
 router.post('/',createAppointment)
-router.get('/patients',getALLappointment)
+router.get('/',getALLappointment)
 router.get('/:id',getOneAppointment)
 router.put('/:id',updateAppointment)
 router.delete(':id',deleteAppointment)

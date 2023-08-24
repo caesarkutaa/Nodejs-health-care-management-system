@@ -45,7 +45,10 @@ const createdoctor = async (req,res)=>{
               message: "Email is already in use."
         });
       }
-      const doc = await Doctor.create(...req.body)
+      const doc = await Doctor.create({
+        _id: new mongoose.Types.ObjectId,
+        ...req.body
+      })
       // @ts-ignore
       const verificationToken = doc.createjwt();
       // Step 3 - Email the user a unique verification link
@@ -154,8 +157,10 @@ const getOnedoctor = async (req,res)=>{
         const doctor = await Doctor.findOne({_id:doctorID})
         if(!doctor){
             return res.status(404).json({msg:`no Doctor with the id found : ${doctorID}`})
-           }
+        }
+           res.status(200).json({doctor})
     } catch (error) {
+      console.log(error)
         res.status(500).json({msg:error})
     }
 }
@@ -164,10 +169,12 @@ const getOnedoctor = async (req,res)=>{
 const updatedoctor = async (req,res)=>{
     const {id:doctorID}= req.params
     try {
-        const doctor = await Doctor.findByIdAndUpdate({_id:doctorID})
+        const doctor = await Doctor.findByIdAndUpdate({_id:doctorID},{$set:req.body},
+          {new:true})
         if(!doctor){
             return res.status(404).json({msg:`no Doctor with the id found : ${doctorID}`})
            }
+           res.status(200).json({doctor})
     } catch (error) {
         res.status(500).json({msg:error})
     }
@@ -182,6 +189,7 @@ const deletedoctor = async (req,res)=>{
         if(!doctor){
             return res.status(404).json({msg:`no Doctor with the id found : ${doctorID}`})
            }
+           res.status(200).json({msg:`Account deleted Successfully`})
     } catch (error) {
         res.status(500).json({msg:error})
     }
