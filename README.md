@@ -8,6 +8,7 @@ This is a simple healthcare management system built using Node.js, Express.js, a
 - Schedule and manage appointments for patients.
 - Register doctors with their respective specializations.
 - Assign available doctors to patients based on their specialization.
+- Upload and manage patient-related documents.
 
 ## Getting Started
 
@@ -37,7 +38,16 @@ This is a simple healthcare management system built using Node.js, Express.js, a
      useUnifiedTopology: true,
    });
    ```
+   Replace placeholders with your Cloudinary credentials in app.js:
 
+ ```javascript
+
+   cloudinary.config({
+     cloud_name: 'your-cloud-name',
+     api_key: 'your-api-key',
+     api_secret: 'your-api-secret',
+   });
+   ```
 ## Usage
 
 1. **Start the server:**
@@ -68,6 +78,7 @@ This is a simple healthcare management system built using Node.js, Express.js, a
 - Express.js
 - MongoDB
 - Mongoose
+- Cloudinary (for document uploads)
 
 ## Contributing
 
