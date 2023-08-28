@@ -79,6 +79,10 @@ This is a simple healthcare management system built using Node.js, Express.js, a
 - MongoDB
 - Mongoose
 - Cloudinary (for document uploads)
+- express-fileupload
+- jsonwebtoken
+- bcrypt
+- nodemailer
 
 ## Contributing
 
