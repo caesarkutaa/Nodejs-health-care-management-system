@@ -8,13 +8,13 @@ const {
     updateAppointment,
     deleteAppointment
 } = require ('../controllers/appointment.controllers')
+const auth = require('../middleware/authentication')
 
-
-router.post('/',createAppointment)
-router.get('/',getALLappointment)
-router.get('/:id',getOneAppointment)
-router.put('/:id',updateAppointment)
-router.delete(':id',deleteAppointment)
+router.post('/',auth,createAppointment)
+router.get('/', auth,getALLappointment)
+router.get('/:id',auth,getOneAppointment)
+router.put('/:id',auth,updateAppointment)
+router.delete(':id',auth,deleteAppointment)
 
 
 module.exports = router
