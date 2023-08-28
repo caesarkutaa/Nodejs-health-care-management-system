@@ -14,8 +14,9 @@ const auth = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     //attchin the user to the routes by adding the jwt
     req.user = {
-      doctorId: payload.doctorId,
+      userId: payload.userId,
       name: payload.name,
+      isAdmin: payload.isAdmin,
     };
 
     next();

@@ -8,12 +8,12 @@ const {
     updateAssignment,
     deleteAssignment
 } = require('../controllers/assignment.controllers')
+const auth = require('../middleware/authentication')
 
-
-router.put('/assign-doctor/:patientId/:specialization',createAssignment)
-router.get('/:doctorId/assigns',getALLassignment)
-router.get('/:doctorId',getOneAssignment)
-router.delete('/:id', deleteAssignment)
+router.put('/assign-doctor/:patientId/:specialization',auth,createAssignment)
+router.get('/:doctorId/assigns',auth,getALLassignment)
+router.get('/:doctorId',auth,getOneAssignment)
+router.delete('/:id',auth, deleteAssignment)
 
 
 
