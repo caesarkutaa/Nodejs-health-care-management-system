@@ -13,7 +13,7 @@ const createpatient = async (req,res)=>{
     const patient = await Patient.create(...req.body)
     res.status(201).json({patient})   
     } catch (error) {
-        res.status(500).json({msg:error}) 
+        res.status(500).json({ msg: error });
     }
 }
 
