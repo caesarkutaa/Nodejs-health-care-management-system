@@ -38,49 +38,13 @@ afterAll(async () => {
       .send(newPatient);
     console.log(statusCode)
 
-    expect(statusCode).toBe(201);
-    // expect(response.body).toHaveProperty('id');
-    // expect(response.body.firstname).toBe(newPatient.firstname);
-    // expect(response.body.lastname).toBe(newPatient.lastname);
-    // expect(response.body.birthDate).toBe(newPatient.birthDate);
-    // expect(response.body.gender).toBe(newPatient.gender);
-    // expect(response.body.address).toBe(newPatient.address);
+    expect(response.status).toBe(201);
+    expect(response.body).toHaveProperty('id');
+    expect(response.body.firstname).toBe(newPatient.firstname);
+    expect(response.body.lastname).toBe(newPatient.lastname);
+    expect(response.body.birthDate).toBe(newPatient.birthDate);
+    expect(response.body.gender).toBe(newPatient.gender);
+    expect(response.body.address).toBe(newPatient.address);
     // Add more assertions based on your API response
   });
-
-//   it('should handle validation errors when creating a patient', async () => {
-//     // Create a patient with missing required fields (causing validation error)
-//     const invalidPatient = {
-//       age: 25,
-//       contact: 'invalid-email',
-//       // Missing name and gender, which are required fields
-//     };
-
-//     const response = await request(app)
-//       .post('/api/patients')
-//       .send(invalidPatient);
-
-//     expect(response.status).toBe(400); // Expect a Bad Request status
-//     expect(response.body).toHaveProperty('error');
-//     expect(response.body.error).toContain('Validation error');
-//     // Add more assertions based on your expected error response
-//   });
-
-//   it('should handle server errors gracefully', async () => {
-//     // Simulate a server error by sending invalid data or causing an exception
-//     const invalidData = {
-//       name: 'Invalid Patient',
-//       age: 'invalid-age', // Age should be a number, not a string
-//       gender: 'Male',
-//       contact: 'valid-email@example.com',
-//     };
-
-//     const response = await request(app)
-//       .post('/api/patients')
-//       .send(invalidData);
-
-//     expect(response.status).toBe(500); // Expect a Server Error status
-//     expect(response.body).toHaveProperty('error');
-//     // Add more assertions based on your expected error response
-//   });
  });
