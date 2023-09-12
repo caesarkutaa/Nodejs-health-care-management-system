@@ -10,10 +10,11 @@ const expressfileuploader = require('express-fileupload')
 
 const createpatient = async (req,res)=>{
     try {
-    const patient = await Patient.create(...req.body)
+    const patient = await Patient.create(req.body)
     res.status(201).json({patient})   
     } catch (error) {
         res.status(500).json({ msg: error });
+        console.log(error);
     }
 }
 
