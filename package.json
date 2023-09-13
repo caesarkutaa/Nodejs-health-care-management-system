@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/app.js",
     "lint": "prettier --write .",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch"
   },
   "keywords": [],

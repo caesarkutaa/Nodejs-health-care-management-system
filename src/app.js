@@ -24,8 +24,6 @@ app.use(
   })
 );
 
-
-
 // routes
 app.use("/api/v1/doctor", doctorRouters);
 app.use("/api/v1/patient", patientRouter);
@@ -40,20 +38,14 @@ app.use(function (req, res) {
   res.status(404).send({ url: req.originalUrl + " not found" });
 });
 
-// connect database
-require("./DB/db").connect();
+
 
 // middleware
 // app.use(rootMiddleware);
+const PORT =  3000;
 
-
-
-
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-  console.log(`server running on port ${port}`);
-});
-
+app.get("/", (req, res) => {
+  res.send('welcome!!! ')
+})
 
 module.exports = app;
