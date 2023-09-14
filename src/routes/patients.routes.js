@@ -18,7 +18,7 @@ router.get('/:id',getOnepatient)
 router.get('/medication-reminders/:patientId', auth,medicationSchedule)
 router.patch('/:id',updatePatient)
 router.post('/upload/:id', uploadFile)
-router.delete('/:patientId',deletePatient)
+router.delete('/:id',deletePatient)
 
 
 module.exports = router

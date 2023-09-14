@@ -50,7 +50,7 @@ const updatePatient = async (req,res)=>{
     try {
         const patient = await Patient.findByIdAndUpdate(req.params.id,{$set:req.body},
             {new:true})
-            res.status(200).json(patient,{msg:'patient updated successfully'})
+            res.status(202).json({msg:'patient updated successfully', data:patient})
         } catch (error) {
             res.status(500).json({msg:error})
             console.log(error);
@@ -59,13 +59,13 @@ const updatePatient = async (req,res)=>{
 
 
 const deletePatient = async (req,res)=>{
-    const {id:patientID} = req.params
+    
     try {
-        const patient = await Patient.findByIdAndDelete({_id:patientID})
+        const patient = await Patient.findByIdAndDelete(req.params.id)
         if(!patient){
             return res.status(404).json({msg:`no patient with the id found : ${patientID}`})
         }
-             res.status(200).json({patient})
+             res.status(204).json(null) // delete endpoint should always be no content
            
     } catch (error) {
             res.status(404).json({msg:error})
