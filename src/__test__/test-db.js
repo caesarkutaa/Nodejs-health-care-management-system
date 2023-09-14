@@ -1,13 +1,15 @@
-// @ts-nocheck
-
-const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
-// Create a new instance of the in-memory MongoDB server
-const mongoServer = new MongoMemoryServer();
+mongoose.Promise = global.Promise;
 
-// Configure and connect Mongoose to the in-memory database
-async function connect() {
+class Connection {
+  constructor() {
+    this.mongoServer = MongoMemoryServer.create();
+    this.connection = null;
+  }
+
+  async connect() {
     this.mongoServer = await MongoMemoryServer.create();
     const mongoUri = this.mongoServer.getUri();
 
@@ -15,13 +17,33 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+  }
 
+  async disconnect() {
+    await mongoose.disconnect();
+    await this.mongoServer.stop();
+  }
+
+  async cleanup() {
+    const models = Object.keys(this.connection.models);
+    const promises = [];
+
+    models.map((model) => {
+      promises.push(this.connection.models[model].deleteMany({}));
+    });
+
+    await Promise.all(promises);
+  }
 }
 
-// Disconnect and stop the in-memory database when the tests are done
-async function closeDatabase() {
-  await mongoose.disconnect();
-  await mongoServer.stop();
-}
-
-module.exports = { connect, closeDatabase };
+/**
+ * Create the initial database connection.
+ *
+ * @async
+ * @return {Promise<Object>}
+ */
+exports.connect = async () => {
+  const conn = new Connection();
+  await conn.connect();
+  return conn;
+};

@@ -19,6 +19,7 @@ const createNurse = async (req, res) =>{
         res.status(201).json(nurse);
       } catch (error) {
         res.status(400).json({ error: 'Could not create nurse' });
+           console.log(error);
       }
 }
 
@@ -73,10 +74,8 @@ const getOneNurse = async (req, res) =>{
 const updateNurse = async (req, res) =>{
     const {id:nurseID} = req.params
     try {
-        const nurse = await Nurse.findOneAndUpdate({_id:nurseID},req.body,{
-            new:true,
-            runValidators:true
-        })
+        const nurse = await Nurse.findOneAndUpdate({_id:nurseID},{$set:req.body},
+            {new:true})
             res.status(200).json({nurse})
         } catch (error) {
             res.status(500).json({msg:error})

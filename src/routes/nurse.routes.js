@@ -15,7 +15,7 @@ const auth = require("../middleware/authentication")
 router.post('/',createNurse)
 router.post('/login',loginNurse)
 router.get('/', getAllNurse)
-router.get('/:id', auth,getOneNurse)
+router.get('/:id', getOneNurse)
 router.put('/:id',auth,updateNurse)
 router.delete('/:id',auth,deleteNurse)
 
