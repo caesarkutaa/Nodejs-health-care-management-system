@@ -14,11 +14,11 @@ const auth = require("../middleware/authentication")
 
 router.post('/',createpatient)
 router.get('/patients',getALLpatients)
-router.get('/:patientId',getOnepatient)
+router.get('/:id',getOnepatient)
 router.get('/medication-reminders/:patientId', auth,medicationSchedule)
-router.put('/:patientId', auth,updatePatient)
-router.post('/upload/:patientId',auth, uploadFile)
-router.delete('/:patientId', auth,deletePatient)
+router.patch('/:id',updatePatient)
+router.post('/upload/:id', uploadFile)
+router.delete('/:patientId',deletePatient)
 
 
 module.exports = router

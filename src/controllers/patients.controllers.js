@@ -26,6 +26,7 @@ const getALLpatients = async (req,res)=>{
         res.status(200).json({patients})
     } catch (error) {
         res.status(500).json({msg:error})
+        console.log(error);
     }
     
     
@@ -39,6 +40,7 @@ const getOnepatient = async (req,res)=>{
         if(!patient){
             return res.status(404).json({msg:`no patient with the id found : ${patientID}`})
            }
+           res.status(200).json({patient})
     } catch (error) {
         res.status(500).json({msg:error})
     }
@@ -46,14 +48,12 @@ const getOnepatient = async (req,res)=>{
 
 const updatePatient = async (req,res)=>{
     try {
-        const {id:patientID} = req.params
-        const patient = await Patient.findOneAndUpdate({_id:patientID},req.body,{
-            new:true,
-            runValidators:true
-        })
-            res.status(200).json({patient})
+        const patient = await Patient.findByIdAndUpdate(req.params.id,{$set:req.body},
+            {new:true})
+            res.status(200).json(patient,{msg:'patient updated successfully'})
         } catch (error) {
             res.status(500).json({msg:error})
+            console.log(error);
      }
 }
 
@@ -65,8 +65,8 @@ const deletePatient = async (req,res)=>{
         if(!patient){
             return res.status(404).json({msg:`no patient with the id found : ${patientID}`})
         }
-             req.status(200).json({patient})
-            // req.status(200).send()
+             res.status(200).json({patient})
+           
     } catch (error) {
             res.status(404).json({msg:error})
     }

@@ -48,4 +48,10 @@ app.get("/", (req, res) => {
   res.send('welcome!!! ')
 })
 
+
+app.listen(PORT, async () => {
+  require("./DB/db").connect();
+  console.log(`listening to ${PORT}`);
+})
+
 module.exports = app;
